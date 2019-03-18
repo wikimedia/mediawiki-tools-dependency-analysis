@@ -1,0 +1,18 @@
+#!/bin/bash
+
+dir=`dirname $0`
+phpda="$dir/vendor/bin/phpda"
+cr="$dir/src/CycleReport.php"
+mwdir="${1:-.}"
+
+if [ ! -d "$mwdir/includes" ]; then
+	echo "$mwdir/includes does not exist or is not a directory."
+	echo "Please specify the location of MediaWiki as the first parameter."
+	exit 5
+fi
+
+"$phpda" analyze --source "$mwdir/includes" namespace-usage-graph.yaml
+"$phpda" analyze --source "$mwdir/includes" namespace-usage-json.yaml
+# "$phpda" analyze --source "$mwdir/includes" class-usage-json.yaml
+
+php "$cr" "$dir/www/report/namespace-usage.json" "$dir/www/report/"

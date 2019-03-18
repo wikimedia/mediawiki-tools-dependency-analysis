@@ -1,0 +1,18 @@
+mode: 'usage'
+# The path is relative to the location of this file, which doesn't work.
+# Use the -s option on the command line instead.
+source: './includes'
+filePattern: '*.php'
+ignore: 'tests'
+formatter: 'PhpDA\Writer\Strategy\Svg'
+target: './www/report/namespace-usage-graph.svg'
+groupLength: 1
+visitor:
+  - PhpDA\Parser\Visitor\TagCollector
+  - PhpDA\Parser\Visitor\NamespacedStringCollector
+visitorOptions:
+  PhpDA\Parser\Visitor\Required\DeclaredNamespaceCollector: {sliceLength: -1}
+  PhpDA\Parser\Visitor\Required\MetaNamespaceCollector: {sliceLength: -1}
+  PhpDA\Parser\Visitor\Required\UsedNamespaceCollector: {sliceLength: -1}
+  PhpDA\Parser\Visitor\TagCollector: {sliceLength: -1}
+  PhpDA\Parser\Visitor\NamespacedStringCollector: {sliceLength: -1}

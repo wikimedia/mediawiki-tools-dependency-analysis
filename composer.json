@@ -1,0 +1,34 @@
+{
+    "name": "mediawiki/dependency-analysis",
+    "description": "Dependency analysis and report for MediaWiki.",
+    "version": "0.1",
+    "type": "project",
+    "keywords": [
+        "phpda",
+        "quality",
+        "mediawiki",
+        "dependency",
+        "cyclic",
+        "metrics"
+    ],
+    "license": "GPL 2+",
+    "authors": [
+        {
+            "name": "Daniel Kinzler"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "mamuz/php-dependency-analysis": "^1.3",
+        "symfony/console": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+    },
+    "autoload": {
+        "psr-4": { "MediaWiki\\DependencyAnalysis\\": "src/" }
+    },
+    "bin": [
+        "bin/mwda"
+    ]
+}
