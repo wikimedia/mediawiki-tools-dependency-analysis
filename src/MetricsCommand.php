@@ -40,7 +40,8 @@ class MetricsCommand extends Command {
 		$dir = $input->getArgument( 'directory' );
 
 		$metrics = $this->extractMetrics( $file );
-		print_r( $metrics );
+		$this->writeMetricsJson( $metrics, "$dir/metrics.json" );
+		$this->writeMetricsHtml( $metrics, "$dir/metrics.html" );
 	}
 	
 	public function extractMetrics( $file ) {
@@ -51,6 +52,18 @@ class MetricsCommand extends Command {
 		$metrics['number-of-cycles'] = count( $data->cycles );
 		
 		return $metrics;
+	}
+	
+	public function writeMetricsJson( $metrics, $outFile ) {
+		file_put_contents( $outFile, json_encode( $metrics ) );
+	}
+
+	public function writeMetricsHtml( $metrics, $outFile ) {
+		$template = __DIR__ . '/metrics.mustache';
+		$mustache = file_get_contents( $template );
+		
+		$m = new \Mustache_Engine();
+		file_put_contents( $outFile, $m->render( $mustache, $metrics ) );
 	}
 
 }

@@ -16,3 +16,5 @@ fi
 # "$phpda" analyze --source "$mwdir/includes" class-usage-json.yaml
 
 php "$cr" "$dir/www/report/namespace-usage.json" "$dir/www/report/"
+
+chmod -R a+rX "$dir/www/"
