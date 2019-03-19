@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dir=`dirname $0`
-cr="$dir/src/CycleReport.php"
+metrics="$dir/src/metrics.php"
 mwdir="${1:-.}"
 
 if [ ! -d "$mwdir/includes" ]; then
@@ -13,6 +13,6 @@ fi
 "$dir/analyze" namespace-usage "$mwdir/includes" Svg
 "$dir/analyze" namespace-usage "$mwdir/includes" Json
 
-php "$cr" "$dir/www/report/namespace-usage.json" "$dir/www/report/"
+php "$metrics" "$dir/www/report/"
 
 chmod -R a+rX "$dir/www/"

@@ -8,9 +8,7 @@
 
 namespace MediaWiki\DependencyAnalysis;
 
-require __DIR__.'/../vendor/autoload.php';
-
-$mustache = '';
+require __DIR__ . '/../vendor/autoload.php';
 
 function readStdin() {
 	$f = fopen( 'php://stdin', 'r' );

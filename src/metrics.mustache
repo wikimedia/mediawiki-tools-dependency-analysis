@@ -7,8 +7,17 @@
 	<body>
 		<h1>Cyclic Dependency Metrics for MediaWiki</h1>
 		
+		{{#metrics}}
+		<h2>{{entity}}</h2>
 		<ol>
-			<li><strong>Number of cycles</strong>: {{number-of-cycles}}</li>
+			<li><strong>Number of {{entity}}</strong> (N): {{vertices}}</li>
+			<li><strong>Number of {{entity}} in cycles (Nc)</strong>: {{verticesInCycles}}</li>
+			<li><strong>Number of cycles</strong> (C): {{cycles}}</li>
+			<li><strong>Number of dependencies</strong> (E): {{edges}}</li>
+			<li><strong>Density</strong> (d = E/N^2): {{density}} (shoudl be around 0.1)</li>
+			<li><strong>Degree</strong> (k = N/E): {{degree}} (shoudl be around 1.5)</li>
+			<li><strong>Cyclicity</strong> (y = Nc/N): {{cyclicity}} (shoudl be 0)</li>
 		</ol>
+		{{/metrics}}
 	</body>
 </html>
