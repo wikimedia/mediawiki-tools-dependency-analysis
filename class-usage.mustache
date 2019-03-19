@@ -1,0 +1,10 @@
+{{=<% %>=}}
+mode: 'usage'
+source: '<%source%>'
+filePattern: '*.php'
+formatter: 'PhpDA\Writer\Strategy\<%formatter%>'
+target: '<%target%>'
+groupLength: <%groupLength%><%^groupLength%>-1<%/groupLength%>
+visitor:
+  - PhpDA\Parser\Visitor\TagCollector
+  - PhpDA\Parser\Visitor\NamespacedStringCollector

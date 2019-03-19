@@ -10,9 +10,8 @@ if [ ! -d "$mwdir/includes" ]; then
 	exit 5
 fi
 
-"$dir/analyze" "$mwdir" namespace-usage-graph.yaml
-"$dir/analyze" "$mwdir" namespace-usage-json.yaml
-# "$dir/analyze" class-usage-json.yaml
+"$dir/analyze" namespace-usage "$mwdir/includes" Svg
+"$dir/analyze" namespace-usage "$mwdir/includes" Json
 
 php "$cr" "$dir/www/report/namespace-usage.json" "$dir/www/report/"
 

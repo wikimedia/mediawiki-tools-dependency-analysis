@@ -1,10 +1,10 @@
 <?php
 /**
- * This file is part of PhpTangle.
+ * This file is part of mediawiki/dependency-analysis.
  *
- * @license LGPL 2+
+ * @license GPL 2+
  * @author Daniel Kinzler
- */
+  */
 
 namespace MediaWiki\DependencyAnalysis;
 

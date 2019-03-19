@@ -1,12 +1,10 @@
+{{=<% %>=}}
 mode: 'usage'
-# The path is relative to the location of this file, which doesn't work.
-# Use the -s option on the command line instead.
-source: './includes'
+source: '<%source%>'
 filePattern: '*.php'
-ignore: 'tests'
-formatter: 'PhpDA\Writer\Strategy\Json'
-target: './www/report/namespace-usage.json'
-groupLength: 1
+formatter: 'PhpDA\Writer\Strategy\<%formatter%>'
+target: '<%target%>'
+groupLength: <%groupLength%><%^groupLength%>1<%/groupLength%>
 visitor:
   - PhpDA\Parser\Visitor\TagCollector
   - PhpDA\Parser\Visitor\NamespacedStringCollector
