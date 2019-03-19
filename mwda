@@ -1,7 +1,6 @@
 #!/bin/bash
 
 dir=`dirname $0`
-phpda="$dir/vendor/bin/phpda"
 cr="$dir/src/CycleReport.php"
 mwdir="${1:-.}"
 
@@ -11,9 +10,9 @@ if [ ! -d "$mwdir/includes" ]; then
 	exit 5
 fi
 
-"$phpda" analyze --source "$mwdir/includes" namespace-usage-graph.yaml
-"$phpda" analyze --source "$mwdir/includes" namespace-usage-json.yaml
-# "$phpda" analyze --source "$mwdir/includes" class-usage-json.yaml
+"$dir/analyze" "$mwdir" namespace-usage-graph.yaml
+"$dir/analyze" "$mwdir" namespace-usage-json.yaml
+# "$dir/analyze" class-usage-json.yaml
 
 php "$cr" "$dir/www/report/namespace-usage.json" "$dir/www/report/"
 
