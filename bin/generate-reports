@@ -1,0 +1,46 @@
+#!/bin/bash
+# This file is part of Project Ruprecht. See COPYING for license.
+set -eu
+
+bindir=`dirname "$0"`
+dir=`dirname "$bindir"`
+
+if [ -z "${1+x}" ]; then
+	echo "USAGE: $0 <directory-with-php-code> [<directory-for-output>]" >&2
+	exit 1
+fi
+
+tgt="$1"
+repdir="${2:-$dir/www/report}"
+
+echo "Generating report in $repdir"
+
+if [ -e "$tgt/includes" ]; then
+	echo "Found includes directory in $tgt, focusing on that, ignoring the rest."
+	tgt="$tgt/includes"
+elif [ -e "$tgt/src" ]; then
+	echo "Found src directory in $tgt, focusing on that, ignoring the rest."
+	tgt="$tgt/src"
+fi
+
+function analyze {
+	name="$1"
+	shift
+	
+	echo "Extracting dependencies ($name) from code in $tgt" 
+	"$bindir/list-dependencies" "$tgt" "$@" | egrep -v '\b(MediaWikiServices|MWException|ApiMain|ApiQuery)\b' > "$repdir/$name.csv"
+
+	echo "Generating graph report ($name)"
+	python3 "$bindir/node-rank-bidi.py" "$repdir/$name.csv" > "$repdir/$name.risk.txt"
+	python3 "$bindir/tangle-stats.py" "$repdir/$name.csv" > "$repdir/$name.tangles.txt"
+
+	echo "Identifying bad dependencies ($name)"
+	nice -n 16 python2 "$bindir/find-bad-dependencies.py" "$repdir/$name.csv" "$repdir/$name.break.csv"
+
+	chmod a+r "$repdir/$name"*
+}
+
+analyze "class-dependencies"
+analyze "namespace-dependencies" --no-classes
+
+rm "$repdir"/*.tmp

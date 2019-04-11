@@ -1,15 +1,54 @@
 <html>
 	<head>
-		<title>Cyclic Dependency Reports for MediaWiki</title>
+		<title>Dependency Analysis Report</title>
 		<link rel="stylesheet" type="text/css" href="mw.css">
  	</head>
 	
 	<body>
-		<h1>Cyclic Dependency Reports for MediaWiki</h1>
-		
-		<ol>
-			<li><a href="report/metrics.html">Cyclic Dependency Metrics</a> (<a href="report/metrics.json">JSON</a>)</li>
-			<li><a href="report/namespace-usage.svg">Namespace Dependencies</a> (<a href="report/namespace-usage.json">JSON</a>)</li>
-		</ol>
+		<div style="max-width: 80em; margin-left: auto; margin-right: auto">
+			<h1>Dependency Analysis Report</h1>
+			
+			<ol>
+				<li><a href="report/class-dependencies.tangles.txt">Tangledness statistics for classes</a>.
+					<small>A "tangle" is a <e>strongly connected component</e> of the dependency graph containing two or more nodes. 
+					The "tangledness" is given by the percentage of classes that are part of a tangle.</small>
+				</li>
+				<li><a href="report/class-dependencies.break.csv">Problematic dependencies betwen classes</a> (CSV).
+					<small>This lists suggests dependencies to remove in order to remove "tangles" from the codebase. 
+					It provides one of many possible sets of dependencies to remove that would make the dependency
+					graph acyclic, in a way to preserves the intended semantics of the dependency graph. The heuristic
+					used to determine which dependencies should be removed is described in the paper
+					<e><a href="https://github.com/zhenv5/breaking_cycles_in_noisy_hierarchies/blob/master/paper/Paper_WebSci_17_Breaking_Cycles_in_Noisy_Hierarchies.pdf">Breaking Cycles in Noisy Hierarchies</a></e>
+					by Jiankai Sun et.al.</small>
+				</li>
+				<li><a href="report/class-dependencies.risk.txt">Classes ordered by risk</a>.
+					<small>The riskiness of each class is determiend using the bi-directional Page Rank score,
+					which is the product of the normal Page Rank score, and the Page Rank score calculated
+					for the inverse (transposed) graph. The idea is that the page rank score indicates how much 
+					a class is influenced by other classes, and the reverse page rank indicates how much it influences
+					other classes - and a class that is both very influential, but also subject to a lot of influence,
+					is very risky.</small>
+				</li>
+				<li><a href="report/class-dependencies.csv">All dependencies betwen classes</a> (CSV).
+					<small>Provided for reference, and for debugging the analyzer.</small>
+				</li>
+				
+				<li><a href="report/namespace-dependencies.tangles.txt">Tangledness statistics for namespaces</a>.
+					<small>A "tangle" is a <e>strongly connected component</e> of the dependency graph containing two or more nodes. 
+					The "tangledness" is given by the percentage of namespaces that are part of a tangle.</small>
+				</li>
+				<li><a href="report/namespace-dependencies.break.csv">Problematic dependencies betwen namespaces</a> (CSV).
+					<small>This lists suggests dependencies to remove in order to remove "tangles" from the codebase. </small>
+				</li>
+				<li><a href="report/namespace-dependencies.risk.txt">Namespaces ordered by risk</a>.
+					<small>The riskiness of each namespace is determiend using the bi-directional Page Rank score.</small>
+				</li>
+				<li><a href="report/namespace-dependencies.csv">All dependencies betwen namespaces</a> (CSV).
+					<small>Provided for reference, and for debugging the analyzer.</small>
+				</li>
+			</ol>
+			
+			<p style="text-align:right"><small>Project Ruprecht</small></p>
+		</div>
 	</body>
 </html>

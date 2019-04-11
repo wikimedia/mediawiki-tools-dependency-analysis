@@ -1,0 +1,20 @@
+#!/bin/bash
+# This file is part of Project Ruprecht. See COPYING for license.
+set -eu
+
+bindir=`dirname "$0"`
+dir=`dirname "$bindir"`
+
+if [ -z "${1+x}" ]; then
+	echo "USAGE: $0 <directory-with-php-code>" >&2
+	exit 1
+fi
+
+function list {
+	tgt="$1"
+	shift
+	
+	nice -n 16 php -d memory_limit=1000M "$dir/vendor/bin/dephpend" text "$tgt" "$@" | grep -v "xdebug enabled" | sed 's/ *--> */\t/'
+}
+
+list "$@"
