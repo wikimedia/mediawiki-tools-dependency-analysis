@@ -1,16 +1,17 @@
 <html>
 	<head>
-		<title>Dependency Analysis Report</title>
+		<title>DA Overview</title>
 		<link rel="stylesheet" type="text/css" href="mw.css">
  	</head>
 	
 	<body>
 		<div style="max-width: 80em; margin-left: auto; margin-right: auto">
-			<h1>Dependency Analysis Report</h1>
+			<h1>Dependency Analysis Overview</h1>
 			
-			<ol>
+			Class dependency reports:
+			<ul>
 				<li><a href="report/class-dependencies.tangles.txt">Tangledness statistics for classes</a>.
-					<small>A "tangle" is a <e>strongly connected component</e> of the dependency graph containing two or more nodes. 
+					<small>A "tangle" is a <a href="https://en.wikipedia.org/wiki/Strongly_connected_component">strongly connected component</a> of the dependency graph containing two or more nodes. 
 					The "tangledness" is given by the percentage of classes that are part of a tangle.</small>
 				</li>
 				<li><a href="report/class-dependencies.break.csv">Problematic dependencies betwen classes</a> (CSV).
@@ -18,7 +19,7 @@
 					It provides one of many possible sets of dependencies to remove that would make the dependency
 					graph acyclic, in a way to preserves the intended semantics of the dependency graph. The heuristic
 					used to determine which dependencies should be removed is described in the paper
-					<e><a href="https://github.com/zhenv5/breaking_cycles_in_noisy_hierarchies/blob/master/paper/Paper_WebSci_17_Breaking_Cycles_in_Noisy_Hierarchies.pdf">Breaking Cycles in Noisy Hierarchies</a></e>
+					<a href="https://github.com/zhenv5/breaking_cycles_in_noisy_hierarchies/blob/master/paper/Paper_WebSci_17_Breaking_Cycles_in_Noisy_Hierarchies.pdf">Breaking Cycles in Noisy Hierarchies</a>
 					by Jiankai Sun et.al.</small>
 				</li>
 				<li><a href="report/class-dependencies.risk.txt">Classes ordered by risk</a>.
@@ -32,9 +33,12 @@
 				<li><a href="report/class-dependencies.csv">All dependencies betwen classes</a> (CSV).
 					<small>Provided for reference, and for debugging the analyzer.</small>
 				</li>
-				
+			</ul>
+			
+			Namespace dependency reports:
+			<ul>
 				<li><a href="report/namespace-dependencies.tangles.txt">Tangledness statistics for namespaces</a>.
-					<small>A "tangle" is a <e>strongly connected component</e> of the dependency graph containing two or more nodes. 
+					<small>A "tangle" is a <a href="https://en.wikipedia.org/wiki/Strongly_connected_component">strongly connected component</a> of the dependency graph containing two or more nodes. 
 					The "tangledness" is given by the percentage of namespaces that are part of a tangle.</small>
 				</li>
 				<li><a href="report/namespace-dependencies.break.csv">Problematic dependencies betwen namespaces</a> (CSV).
@@ -46,7 +50,7 @@
 				<li><a href="report/namespace-dependencies.csv">All dependencies betwen namespaces</a> (CSV).
 					<small>Provided for reference, and for debugging the analyzer.</small>
 				</li>
-			</ol>
+			</ul>
 			
 			<p style="text-align:right"><small>Project Ruprecht</small></p>
 		</div>
