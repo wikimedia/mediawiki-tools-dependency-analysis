@@ -19,6 +19,6 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "dephpend/dephpend": "~0.5",
+        "dephpend/dephpend": "~0.5"
     }
 }
