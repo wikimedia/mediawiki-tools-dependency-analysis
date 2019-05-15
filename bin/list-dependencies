@@ -14,7 +14,7 @@ function list {
 	tgt="$1"
 	shift
 	
-	nice -n 16 php -d memory_limit=1000M "$dir/vendor/bin/dephpend" text "$tgt" "$@" | grep -v "xdebug enabled" | sed 's/ *--> */\t/'
+	nice -n 16 php -d memory_limit=1000M "$dir/vendor/bin/dephpend" text "$tgt" "$@" | grep -v "xdebug enabled" | sed $'s/ *--> */\t/'
 }
 
 list "$@"
