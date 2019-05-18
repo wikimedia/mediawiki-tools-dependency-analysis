@@ -29,5 +29,5 @@ def pageRankBiDi( g ):
 
 g = gt.load_graph_from_csv( sys.argv[1], csv_options = { 'delimiter': "\t" } )
 
-pr = pageRankBiDi( g )
+pr = pageRankBiDi( g ) if g.num_vertices() > 0 else []
 print_top_v( g, pr )

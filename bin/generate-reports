@@ -3,6 +3,7 @@
 set -eu
 
 bindir=`dirname "$0"`
+bindir=`realpath "$bindir"`
 dir=`dirname "$bindir"`
 
 if [ -z "${1+x}" ]; then
@@ -27,12 +28,15 @@ function analyze {
 	name="$1"
 	shift
 	
-	echo "Extracting dependencies ($name) from code in $tgt" 
+	echo "Extracting dependencies from code in $tgt" 
 	"$bindir/list-dependencies" "$tgt" "$@" | egrep -v '\b(MediaWikiServices|MWException|ApiMain|ApiQuery)\b' > "$repdir/$name.csv"
+
+	echo "Collecting per-file stats from code in $tgt" 
+	find "$tgt" -name "*.php" -type f | php "$bindir/loc.php" | cut -f 1,4 > "$repdir/$name.loc.csv"
 
 	echo "Generating graph report ($name)"
 	python3 "$bindir/node-rank-bidi.py" "$repdir/$name.csv" > "$repdir/$name.risk.txt"
-	python3 "$bindir/tangle-stats.py" "$repdir/$name.csv" > "$repdir/$name.tangles.txt"
+	python3 "$bindir/tangle-stats.py" "$repdir/$name.csv" "$repdir/$name.loc.csv" > "$repdir/$name.tangles.txt"
 
 	echo "Identifying bad dependencies ($name)"
 	nice -n 16 python2 "$bindir/find-bad-dependencies.py" "$repdir/$name.csv" "$repdir/$name.break.csv"
