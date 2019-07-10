@@ -20,6 +20,8 @@
     "require": {
         "php": ">=7.0.0",
         "dephpend/dephpend": "~0.5",
-        "phploc/phploc": "^5"
+        "phploc/phploc": "^5",
+
+        "symfony/event-dispatcher": ">=4.2 <4.3"
     }
 }
