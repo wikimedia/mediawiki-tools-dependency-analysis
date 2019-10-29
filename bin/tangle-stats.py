@@ -82,7 +82,7 @@ def dump_nprops( prop ):
 	
 	print( m )
 
-g = gt.load_graph_from_csv( sys.argv[1], csv_options = { 'delimiter': "\t" } )
+g = gt.load_graph_from_csv( sys.argv[1], csv_options = { 'delimiter': "\t" }, directed=True )
 
 if len( sys.argv ) > 2:
 	loc = load_loc( sys.argv[2], g )
@@ -90,6 +90,7 @@ else:
 	loc = None
 
 comp, hist = topo.label_components( g )
+
 num_total, sum_good, sum_total, largest_size = analyze_histogram( hist )
 
 if sum_total == 0:
@@ -111,5 +112,6 @@ if loc:
 	num_total, sum_good, sum_total, largest_size = analyze_histogram( hist, loc_hist )
 	print( "LoC: %i" % ( sum_total ) )
 	# print( "LoC not tangled: %i" % ( sum_good ) )
-	print( "LoC in tangles: %i (%i%%)" % ( ( sum_total - sum_good ), ( 100 * ( sum_total - sum_good ) / sum_total ) ) )
-	print( "LoC in largest tangle: %i (%i%%)" % ( largest_size, ( 100 * largest_size / sum_total ) ) )
+	if sum_total:
+		print( "LoC in tangles: %i (%i%%)" % ( ( sum_total - sum_good ), ( 100 * ( sum_total - sum_good ) / sum_total ) ) )
+		print( "LoC in largest tangle: %i (%i%%)" % ( largest_size, ( 100 * largest_size / sum_total ) ) )
