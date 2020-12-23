@@ -11,7 +11,7 @@
         "cyclic",
         "metrics"
     ],
-    "license": "GPL 2+",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Daniel Kinzler"
@@ -23,5 +23,14 @@
         "phploc/phploc": "^5",
 
         "symfony/event-dispatcher": ">=4.2 <4.3"
+    },
+    "require-dev": {
+        "php-parallel-lint/php-parallel-lint": "1.2.0",
+        "php-parallel-lint/php-console-highlighter": "0.5.*"
+    },
+    "scripts": {
+        "test": [
+            "parallel-lint . --exclude vendor"
+        ]
     }
 }
