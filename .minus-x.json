@@ -1,0 +1,5 @@
+{
+	"ignoreDirectories": [
+		"./contrib/breaking_cycles_in_noisy_hierarchies"
+	]
+}
